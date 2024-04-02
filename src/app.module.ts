@@ -5,6 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './config/mongo.config';
 import { CacheModule } from './providers/cache/cache.module';
 import { UsersModule } from './modules/users/users.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthGuard } from './modules/auth/auth.guard';
+import { TokensModule } from './providers/tokens/tokens.module';
 
 @Module({
   imports: [
@@ -12,8 +16,12 @@ import { UsersModule } from './modules/users/users.module';
     MongooseModule.forRootAsync({ useClass: MongooseConfigService, imports: [ConfigModule] }),
     CacheModule,
     UsersModule,
+    AuthModule,
+    TokensModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    { provide: APP_GUARD, useClass: AuthGuard },
+  ],
 })
 export class AppModule { }

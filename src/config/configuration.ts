@@ -12,6 +12,11 @@ const config: Configuration = {
         username: process.env.REDIS_USERNAME || 'root',
         password: process.env.REDIS_PASSWORD || 'password',
     },
+    security: {
+        jwtSecret: process.env.JWT_SECRET || 'thereisnosecret',
+        accessTokenExpiry: process.env.ACCESS_TOKEN_EXPIRY || '7d',
+        cacheExpiry: +(process.env.CACHE_EXPIRY || 7 * 24 * 60 * 60 * 1000)
+    },
 };
 
 export const configuration: ConfigFactory<Configuration> = () => config;

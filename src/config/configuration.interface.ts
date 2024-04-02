@@ -8,4 +8,9 @@ export interface Configuration {
         username: string;
         password: string;
     };
+    security: {
+        jwtSecret: string;
+        accessTokenExpiry: string;
+        cacheExpiry: number;
+    };
 }
