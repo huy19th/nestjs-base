@@ -9,11 +9,14 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { TokensModule } from './providers/tokens/tokens.module';
+import { ThrottlerConfigService } from './config/throttler.config';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),
     MongooseModule.forRootAsync({ useClass: MongooseConfigService, imports: [ConfigModule] }),
+    ThrottlerModule.forRootAsync({ useClass: ThrottlerConfigService, imports: [ConfigModule] }),
     CacheModule,
     UsersModule,
     AuthModule,
@@ -22,6 +25,7 @@ import { TokensModule } from './providers/tokens/tokens.module';
   controllers: [],
   providers: [
     { provide: APP_GUARD, useClass: AuthGuard },
+    // { provide: APP_GUARD, useClass: ThrottlerGuard }, bind throttle global scope
   ],
 })
 export class AppModule { }
