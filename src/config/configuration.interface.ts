@@ -13,4 +13,10 @@ export interface Configuration {
         accessTokenExpiry: string;
         cacheExpiry: number;
     };
+    nodemailer: {
+        user: string;
+        pass: string;
+        host: string;
+        port: number;
+    };
 }
