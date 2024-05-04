@@ -27,6 +27,8 @@
     "@nestjs/mapped-types": "^2.0.5",
     "@nestjs/mongoose": "^10.0.4",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-socket.io": "^10.3.8",
+    "@nestjs/websockets": "^10.3.8",
     "@types/jsonwebtoken": "^9.0.6",
     "bcrypt": "^5.1.1",
     "cache-manager": "^5.4.0",
@@ -38,7 +40,8 @@
     "normalize-email": "^1.1.1",
     "redis": "^4.6.13",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "socket.io": "^4.7.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

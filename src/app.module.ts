@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { TokensModule } from './providers/tokens/tokens.module';
+import { GameModule } from './modules/game/game.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TokensModule } from './providers/tokens/tokens.module';
     UsersModule,
     AuthModule,
     TokensModule,
+    GameModule,
   ],
   controllers: [],
   providers: [
