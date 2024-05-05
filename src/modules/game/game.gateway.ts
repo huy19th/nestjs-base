@@ -15,6 +15,7 @@ import { GameService } from './game.service';
 import { GameEvent } from './game.constant';
 import { SendMessageDto } from './game.interface';
 import { UserSocket } from '../users/users.interface';
+import customParser from "socket.io-msgpack-parser";
 
 @UsePipes(ValidationPipe)
 @WebSocketGateway(
@@ -22,7 +23,8 @@ import { UserSocket } from '../users/users.interface';
     { // connect options
         namespace: '/game', // add '/game' suffix to connection url
         // path: '/game', add '/game' suffix to handshake path
-        cors: { origin: "*" }
+        cors: { origin: "*" },
+        parser: customParser
     }
 )
 export class GameGateWay implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
