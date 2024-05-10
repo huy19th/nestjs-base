@@ -2,13 +2,18 @@ import { Controller, Get, Post, Delete, Body, Patch, Param } from '@nestjs/commo
 import { WalletsService } from './wallets.service';
 import { CreateWalletDto, AdjustBalanceDto } from './wallets.dto';
 import { IWallet } from './wallets.interface';
+import { ApiTags } from '@nestjs/swagger';
 
 // just for testing database interaction, not how api should be configured
+@ApiTags('wallets')
 @Controller('wallets')
 export class WalletsController {
 
     constructor(private walletsService: WalletsService) { }
 
+    /**
+     * Get all wallets info
+     */
     @Get('/all-wallets')
     async getAllWallets(): Promise<IWallet[]> {
         const wallets = await this.walletsService.getAllWallets();

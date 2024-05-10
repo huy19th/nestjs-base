@@ -1,7 +1,9 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto } from './transactions.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('transactions')
 @Controller('transactions')
 export class TransactionsController {
 
