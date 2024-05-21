@@ -2,6 +2,8 @@ import {Injectable} from '@nestjs/common';
 import {TypeOrmOptionsFactory, TypeOrmModuleOptions} from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { Configuration } from './configuration.interface';
+import { Artist } from 'src/modules/artists/artists.schema';
+import { Song } from 'src/modules/songs/songs.schema';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -16,8 +18,12 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
             username: this.configService.get('mysql.username'),
             password: this.configService.get('mysql.password'),
             database: this.configService.get('mysql.database'),
-            entities: [],
-            synchronize: true,
+            entities: [
+                Artist,
+                Song,
+            ],
+            synchronize: false,
+            migrations: ['src/migrations'],
         }
     }
 
