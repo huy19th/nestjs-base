@@ -1,30 +1,20 @@
-import {Injectable} from '@nestjs/common';
-import {TypeOrmOptionsFactory, TypeOrmModuleOptions} from '@nestjs/typeorm';
-import { ConfigService } from '@nestjs/config';
-import { Configuration } from './configuration.interface';
-import { Artist } from 'src/modules/artists/artists.schema';
-import { Song } from 'src/modules/songs/songs.schema';
+import { Artist } from '../modules/artists/artists.schema';
+import { Song } from '../modules/songs/songs.schema';
+import { DataSource, DataSourceOptions } from 'typeorm';
+require('dotenv').config();
 
-@Injectable()
-export class TypeOrmConfigService implements TypeOrmOptionsFactory {
+const env = process.env;
 
-    constructor(private configService: ConfigService) { }
-
-    createTypeOrmOptions(): TypeOrmModuleOptions {
-        return {
-            type: 'mysql',
-            host: this.configService.get('mysql.host'),
-            port: this.configService.get('mysql.port'),
-            username: this.configService.get('mysql.username'),
-            password: this.configService.get('mysql.password'),
-            database: this.configService.get('mysql.database'),
-            entities: [
-                Artist,
-                Song,
-            ],
-            synchronize: false,
-            migrations: ['src/migrations'],
-        }
-    }
-
+export const typeOrmConfig: DataSourceOptions = {
+    type: 'mysql',
+    host: env.MYSQL_HOST || 'localhost',
+    port: +env.MYSQL_PORT || 1001,
+    username: env.MYSQL_USERNAME || 'nest-base',
+    password: env.MYSQL_PASSWORD || 'nest-base',
+    database: env.MYSQL_DATABASE || 'nest-base',
+    entities: [Artist, Song],
+    migrations: ['src/migrations/*.ts'],
+    synchronize: false,
 }
+
+export default new DataSource(typeOrmConfig);

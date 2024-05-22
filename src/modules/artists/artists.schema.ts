@@ -29,4 +29,10 @@ export class Artist {
     @ManyToMany(() => Song)
     @JoinTable({name: 'artistSongs'})
     songs: Song[];
+
+    @Column({
+        type: 'date',
+        nullable: true,
+    })
+    debut: Date;
 }
